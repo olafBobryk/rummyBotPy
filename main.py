@@ -1,6 +1,9 @@
 import copy
 
-tiles = ['1b','2b','5b','5g','5a'];
+tiles = []
+
+def i(a):
+    return a.split('-')
 
 def verifyState(game):
     for pattern in game:
@@ -47,8 +50,8 @@ def layer(a,b,results,newTiles):
         state = copy.deepcopy(b)
 
 def newPossibleStates(tiles, newTiles):
-    results = [];
-    state = [0];
+    results = []
+    state = [0]
     for tile in tiles:
         temp = copy.deepcopy(tiles)
         state[0] = [tile]
@@ -58,9 +61,8 @@ def newPossibleStates(tiles, newTiles):
 
 def solve(newTiles):
     results = newPossibleStates(tiles + newTiles, newTiles)
-
     def getFlatLength(result):
-        length = 0;
+        length = 0
         for pattern in result:
             length += len(pattern)
         return length
@@ -82,7 +84,7 @@ while True:
         data = input('enter new tiles (/ to cancel): ')
         if data == '/':
             continue
-        tiles.append(*data.split(","))
+        tiles = tiles + data.split(",")
         print(tiles)
     elif command == 'p':
         print(tiles)
